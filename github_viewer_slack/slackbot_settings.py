@@ -3,7 +3,8 @@
 
 import json
 
-API_TOKEN = json.load(open('./../config.json'))['API_TOKEN']
+CONFIG_FILENAME = './../config.json'
+API_TOKEN = json.load(open(CONFIG_FILENAME))['API_TOKEN']
 
 PLUGINS = [
     'github_json_maker',

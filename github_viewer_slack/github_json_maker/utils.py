@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from slackbot.bot import respond_to
-import re
+from urllib.request import urlopen
+from urllib.error import HTTPError
+import json
 
 
 def get_last_commit_id(user_name, repo_name):
@@ -18,7 +19,19 @@ def get_commits(user_name, repo_name):
         repo_name)
     try:
         response = urlopen(url).read()
-    except HTTPError as ex:
+    except HTTPError:
         raise NotFoundRepositoryException('リポジトリ {}/{} は存在しません'
             .format(user_name, repo_name))
+    data = response.decode()
     return json.loads(response.decode())
+
+class RegisteredRepositoryException(Exception):
+    """
+    そのリポジトリが既に登録されているときに検出されるException
+    """
+
+class NotFoundRepositoryException(Exception):
+    """
+    そのリポジトリがgithub上に存在しないときに検出されるException
+    """
+

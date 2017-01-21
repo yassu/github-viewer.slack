@@ -9,4 +9,5 @@ from github_json_maker.utils import get_commits
 
 @respond_to('^\s*list\s*$', re.IGNORECASE)
 def list(message):
+    text = ""
     message.reply('listk')
