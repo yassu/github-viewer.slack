@@ -1,5 +1,11 @@
 {
     "yassu": {
         "MyClock": "cbe0064d5f167ed7980ab7307ca646722f380198"
+    },
+    "NomadBlacky": {
+        "nomadblacky.github.io": "6f100c86e39fc0b1da49165877c85c2c26a38048"
+    },
+    "torvalds": {
+        "linux": "4c9eff7af69c61749b9eb09141f18f35edbf2210"
     }
 }

@@ -7,6 +7,7 @@ from urllib.error import HTTPError
 from slackbot.bot import respond_to
 import re
 import sys
+from github_json_maker.utils import get_last_commit_id, get_commits
 
 
 JSON_FILENAME = 'commits.json'
@@ -57,23 +58,3 @@ def add_repo(user_name, repo_name):
 
     with open(JSON_FILENAME, 'w') as jf:
         json.dump(d, jf, indent=4)
-
-
-def get_last_commit_id(user_name, repo_name):
-    data = get_commits(user_name, repo_name)
-    if len(data) == 0:
-        return ''
-    else:
-        return data[0]['sha']
-
-
-def get_commits(user_name, repo_name):
-    url = 'https://api.github.com/repos/{}/{}/commits'.format(
-        user_name,
-        repo_name)
-    try:
-        response = urlopen(url).read()
-    except HTTPError as ex:
-        raise NotFoundRepositoryException('リポジトリ {}/{} は存在しません'
-            .format(user_name, repo_name))
-    return json.loads(response.decode())
