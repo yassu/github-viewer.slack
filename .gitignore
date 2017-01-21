@@ -1,7 +1,5 @@
 config.json
-
-# wiki dir
-github-viewer.slack.wiki/
+github_viewer_slack/github-viewer.slack.wiki/
 
 
 ### https://raw.github.com/github/gitignore/a98a0444694f30e52fb6eef9aec08e9b5e211a44/python.gitignore
