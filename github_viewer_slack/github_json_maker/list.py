@@ -4,7 +4,7 @@
 
 import re
 from slackbot.bot import respond_to
-from github_json_maker.utils import get_commits, get_branch_names
+from utils import get_commits, get_branch_names
 
 
 @respond_to('^\s*list\s*$', re.IGNORECASE)

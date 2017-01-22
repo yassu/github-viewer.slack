@@ -7,8 +7,8 @@ from github_json_maker.utils import NotFoundRepositoryException
 import json
 
 
-@respond_to('^\s*rm\s+(\S+)\s*')
-def rm(message, github_url):
+@respond_to('^\s*(rm|remove|delete)\s+(\S+)\s*')
+def rm(message, _, github_url):
     if len(github_url.split('/')) != 2:
         message.reply('Illegal as github repository')
         return

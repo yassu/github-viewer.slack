@@ -5,7 +5,7 @@ import json
 from slackbot.bot import respond_to
 import re
 from slackbot_settings import COMMITS_JSON_FILENAME
-from github_json_maker.utils import (get_last_commit_id,
+from utils import (get_last_commit_id,
     RegisteredRepositoryException, NotFoundRepositoryException)
 
 
