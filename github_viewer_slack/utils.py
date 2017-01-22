@@ -26,10 +26,6 @@ def get_commits(user_name, repo_name):
     return json.loads(response.decode())
 
 
-def get_post_commits(user_name, repo_name):
-    pass
-
-
 def get_branches():
     for user_name, repos in get_jdata().items():
         for repo_name in repos:
@@ -44,6 +40,22 @@ def get_branch_names():
 def get_jdata():
     with open('commits.json') as jf:
         return json.load(jf)
+
+
+def get_post_commits(user_name, repo_name):
+    """
+    postする (commit_id, commit_message) の列を生成
+    """
+    posted_last_commit_id = get_jdata()[user_name][repo_name]
+    print(posted_last_commit_id)
+    commits = get_commits(user_name, repo_name)
+
+    for commit in commits:
+        sha = commit['sha']
+        if sha == posted_last_commit_id:
+            break
+        yield commit
+
 
 class RegisteredRepositoryException(Exception):
     """
