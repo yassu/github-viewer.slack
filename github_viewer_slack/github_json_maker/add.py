@@ -9,8 +9,8 @@ from utils import (get_last_commit_id,
     RegisteredRepositoryException, NotFoundRepositoryException)
 
 
-@respond_to('^\s*add\s+(\S+)\s*$', re.IGNORECASE)
-def add(message, github_url):
+@respond_to('^\s*(add\s|\+)\s*(\S+)\s*$', re.IGNORECASE)
+def add(message, _, github_url):
     if len(github_url.split('/')) != 2:
         message.reply('Illegal as github repository')
         return
