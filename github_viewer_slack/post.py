@@ -20,7 +20,7 @@ def post_by_repo(user_name, repo_name):
     text = "{}/{} is comitted: \n".format(user_name, repo_name)
     for commit in get_post_commits(user_name, repo_name):
         message = commit['commit']['message'].split("\n", 1)[0]
-        text += "* {}: {}\n".format(commit['sha'], message)
+        text += "* {}\n".format(message)
 
     last_posted_sha = get_jdata()[user_name][repo_name]
     text += "https://github.com/{}/{}/compare/{}...master\n".format(
