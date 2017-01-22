@@ -25,6 +25,17 @@ def get_commits(user_name, repo_name):
     data = response.decode()
     return json.loads(response.decode())
 
+
+def get_branch_names():
+    for user_name, repos in get_jdata().items():
+        for repo_name in repos:
+            yield user_name + "/" + repo_name
+
+
+def get_jdata():
+    with open('commits.json') as jf:
+        return json.load(jf)
+
 class RegisteredRepositoryException(Exception):
     """
     そのリポジトリが既に登録されているときに検出されるException
@@ -34,4 +45,3 @@ class NotFoundRepositoryException(Exception):
     """
     そのリポジトリがgithub上に存在しないときに検出されるException
     """
-
