@@ -1,17 +1,2 @@
 {
-    "yassu": {
-        "MyClock": "cbe0064d5f167ed7980ab7307ca646722f380198"
-    },
-    "NomadBlacky": {
-        "nomadblacky.github.io": "6f100c86e39fc0b1da49165877c85c2c26a38048"
-    },
-    "torvalds": {
-        "linux": "4c9eff7af69c61749b9eb09141f18f35edbf2210"
-    },
-    "Shougo": {
-        "deoplete.nvim": "c2c51e1adad8fb4437a1f3bb4d2ac95bae51bd8b",
-        "dein.vim": "68ceee0342260fb843457e2f09ff5cb653c59121",
-        "deol.nvim": "fd36c7074baedbcd29d5f15a960e67c2a85d2803",
-        "vim-racer": "49c45bdfae7e1683906931462ab7118dd3dd63e7"
-    }
 }
