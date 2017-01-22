@@ -47,7 +47,6 @@ def get_post_commits(user_name, repo_name):
     postする (commit_id, commit_message) の列を生成
     """
     posted_last_commit_id = get_jdata()[user_name][repo_name]
-    print(posted_last_commit_id)
     commits = get_commits(user_name, repo_name)
 
     for commit in commits:
