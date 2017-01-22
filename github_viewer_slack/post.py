@@ -32,7 +32,7 @@ def post_by_repo(user_name, repo_name):
 
 def update_repo(user_name, repo_name, last_commit_sha):
     d = get_jdata()
-    d[user][repo] = last_commit_sha
+    d[user_name][repo_name] = last_commit_sha
     with open(COMMITS_JSON_FILENAME, 'w') as jf:
         json.dump(d, jf, indent=4)
 
