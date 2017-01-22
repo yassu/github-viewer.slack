@@ -3,7 +3,7 @@
 
 from slackbot.bot import respond_to
 from slackbot_settings import COMMITS_JSON_FILENAME
-from github_json_maker.utils import NotFoundRepositoryException
+from utils import NotFoundRepositoryException
 import json
 
 
