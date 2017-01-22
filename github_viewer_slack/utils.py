@@ -26,10 +26,19 @@ def get_commits(user_name, repo_name):
     return json.loads(response.decode())
 
 
-def get_branch_names():
+def get_post_commits(user_name, repo_name):
+    pass
+
+
+def get_branches():
     for user_name, repos in get_jdata().items():
         for repo_name in repos:
-            yield user_name + "/" + repo_name
+            yield (user_name, repo_name)
+
+
+def get_branch_names():
+    for user_name, repo_name in get_branches():
+        yield user_name + "/" + repo_name
 
 
 def get_jdata():
