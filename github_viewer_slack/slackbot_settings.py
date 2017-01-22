@@ -4,6 +4,7 @@
 import json
 
 CONFIG_FILENAME = './../config.json'
+COMMITS_JSON_FILENAME = 'commits.json'
 API_TOKEN = json.load(open(CONFIG_FILENAME))['API_TOKEN']
 
 PLUGINS = [

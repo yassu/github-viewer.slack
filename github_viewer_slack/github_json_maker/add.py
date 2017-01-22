@@ -4,11 +4,9 @@
 import json
 from slackbot.bot import respond_to
 import re
+from slackbot_settings import COMMITS_JSON_FILENAME
 from github_json_maker.utils import (get_last_commit_id,
     RegisteredRepositoryException, NotFoundRepositoryException)
-
-
-JSON_FILENAME = 'commits.json'
 
 
 @respond_to('^\s*add\s+(\S+)\s*$', re.IGNORECASE)
@@ -30,7 +28,7 @@ def add(message, github_url):
 
 def add_repo(user_name, repo_name):
     d = dict()
-    with open(JSON_FILENAME) as jf:
+    with open(COMMITS_JSON_FILENAME) as jf:
         d = json.load(jf)
 
     commit_id = get_last_commit_id(user_name, repo_name)
@@ -43,5 +41,5 @@ def add_repo(user_name, repo_name):
         raise RegisteredRepositoryException(
             '{}/{}は既に登録されています'.format(user_name, repo_name))
 
-    with open(JSON_FILENAME, 'w') as jf:
+    with open(COMMITS_JSON_FILENAME, 'w') as jf:
         json.dump(d, jf, indent=4)
