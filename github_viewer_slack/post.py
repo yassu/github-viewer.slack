@@ -17,7 +17,7 @@ def post_by_repo(user_name, repo_name):
         return
 
     last_commit_sha = commits[0]['sha']
-    text = "post {}/{}\n".format(user_name, repo_name)
+    text = "{}/{} is comitted: \n".format(user_name, repo_name)
     for commit in get_post_commits(user_name, repo_name):
         message = commit['commit']['message'].split("\n", 1)[0]
         text += "* {}: {}\n".format(commit['sha'], message)
