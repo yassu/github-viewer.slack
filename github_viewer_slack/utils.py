@@ -6,12 +6,10 @@ from datetime import datetime
 import functools
 import traceback
 import json
-
-LOG_FILENAME = 'sample.log'
-TRACEBACK_LIMIT = 10
+from slackbot_settings import ERROR_LOG_FILENAME, TRACEBACK_LIMIT
 
 
-def my_error_wrap(filename=LOG_FILENAME):
+def my_error_wrap(filename=ERROR_LOG_FILENAME):
     def _my_error_wrap(func):
         @functools.wraps(func)
         def command_func(*args, **kw):
@@ -45,7 +43,7 @@ def get_commits(user_name, repo_name):
         repo_name)
     try:
         response = urlopen(url).read()
-    except HTTPError:
+    except HTTPError as ex:
         raise NotFoundRepositoryException('リポジトリ {}/{} は存在しません'
             .format(user_name, repo_name))
     data = response.decode()

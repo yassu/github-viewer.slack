@@ -5,11 +5,12 @@ import json
 from slackbot.bot import respond_to
 import re
 from slackbot_settings import COMMITS_JSON_FILENAME
-from utils import (get_last_commit_id,
+from utils import (get_last_commit_id, my_error_wrap,
     RegisteredRepositoryException, NotFoundRepositoryException)
 
 
 @respond_to('^\s*(add\s|\+)\s*(\S+)\s*$', re.IGNORECASE)
+@my_error_wrap()
 def add(message, _, github_url):
     if len(github_url.split('/')) != 2:
         message.reply('Illegal as github repository')

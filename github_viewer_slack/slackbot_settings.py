@@ -5,6 +5,8 @@ import json
 
 CONFIG_FILENAME = './../config.json'
 COMMITS_JSON_FILENAME = 'commits.json'
+ERROR_LOG_FILENAME = 'log/error_log'
+TRACEBACK_LIMIT = 10
 API_TOKEN = json.load(open(CONFIG_FILENAME))['API_TOKEN']
 Channel = 'github'
 
