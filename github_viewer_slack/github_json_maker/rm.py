@@ -3,11 +3,12 @@
 
 from slackbot.bot import respond_to
 from slackbot_settings import COMMITS_JSON_FILENAME
-from utils import NotFoundRepositoryException
+from utils import NotFoundRepositoryException, my_error_wrap
 import json
 
 
 @respond_to('^\s*(rm\s|remove\s|delete\s|-)\s*(\S+)\s*')
+@my_error_wrap()
 def rm(message, _, github_url):
     if len(github_url.split('/')) != 2:
         message.reply('Illegal as github repository')
