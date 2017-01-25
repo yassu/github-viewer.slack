@@ -7,6 +7,8 @@ import functools
 import traceback
 import json
 from slackbot_settings import ERROR_LOG_FILENAME, TRACEBACK_LIMIT
+import ssl
+ssl._create_default_https_context = ssl._create_unverified_context
 
 
 def my_error_wrap(filename=ERROR_LOG_FILENAME):
