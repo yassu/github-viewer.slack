@@ -3,8 +3,7 @@
 from slackbot_settings import Channel
 from slackbot_settings import API_TOKEN, COMMITS_JSON_FILENAME
 from slacker import Slacker
-from utils import get_jdata, get_commits, get_post_commits, (
-                get_branches, my_error_log)
+from utils import get_jdata, get_commits, get_post_commits, get_branches, my_error_log
 import traceback
 import json
 
