@@ -4,8 +4,9 @@
 import json
 from slackbot.bot import respond_to
 import re
+import traceback
 from slackbot_settings import COMMITS_JSON_FILENAME
-from utils import (get_last_commit_id, my_error_wrap,
+from utils import (get_last_commit_id, my_error_wrap, my_error_log,
     RegisteredRepositoryException, NotFoundRepositoryException)
 
 
@@ -13,6 +14,7 @@ from utils import (get_last_commit_id, my_error_wrap,
 @my_error_wrap()
 def add(message, _, github_url):
     if len(github_url.split('/')) != 2:
+        my_error_log("{}.split('/') != 2".format(github_url))
         message.reply('Illegal as github repository')
         return
     user_name, repo_name = github_url.split('/')
@@ -21,8 +23,10 @@ def add(message, _, github_url):
         message.reply("リポジトリ {}/{}を登録しました".format(
             user_name, repo_name))
     except RegisteredRepositoryException as ex:
+        my_error_log(traceback.format_exc())
         message.reply("Error: {}".format(ex.args[0]))
     except NotFoundRepositoryException as ex:
+        my_error_log(traceback.format_exc())
         message.reply("Error: {}".format(ex.args[0]))
 
 

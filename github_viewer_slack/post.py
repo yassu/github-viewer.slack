@@ -3,7 +3,9 @@
 from slackbot_settings import Channel
 from slackbot_settings import API_TOKEN, COMMITS_JSON_FILENAME
 from slacker import Slacker
-from utils import get_jdata, get_commits, get_post_commits, get_branches
+from utils import get_jdata, get_commits, get_post_commits, (
+                get_branches, my_error_log)
+import traceback
 import json
 
 def post(message):
@@ -43,4 +45,7 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except Exception:
+        my_error_log(traceback.format_exc())
