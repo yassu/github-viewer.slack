@@ -6,9 +6,28 @@ from datetime import datetime
 import functools
 import traceback
 import json
-from slackbot_settings import ERROR_LOG_FILENAME, TRACEBACK_LIMIT
+from slackbot_settings import LOG_FILENAME, ERROR_LOG_FILENAME, TRACEBACK_LIMIT
 import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
+
+
+def get_date_string():
+    now = datetime.now()
+    year, mon, day = now.year, now.month, now.day
+    hour, minute, second = now.hour, now.minute, now.second
+    print(hour)
+    return ("{} {}/{} {}:{}:{}\n".format(year, mon, day, hour, minute, second))
+
+
+def my_log(text, filename=LOG_FILENAME):
+    with open(filename, 'a') as f:
+        f.write(get_date_string())
+        f.write(text)
+        f.write('\n')
+
+
+def my_error_log(text, filename=ERROR_LOG_FILENAME):
+    my_log('Error is occured:\n' + text, filename=filename)
 
 
 def my_error_wrap(filename=ERROR_LOG_FILENAME):
@@ -19,16 +38,18 @@ def my_error_wrap(filename=ERROR_LOG_FILENAME):
                 return func(*args, **kw)
             except Exception as ex:
                 with open(filename, 'a') as f:
-                    now = datetime.now()
-                    year, mon, day = now.year, now.month, now.day
-                    hour, minute, second = now.hour, now.minute, now.second
-                    print(hour)
-                    f.write("{} {}/{} {}:{}:{}\n".format(year, mon, day,
-                                                        hour, minute, second))
+                    f.write(get_date_string())
+                    f.write('Error is occured:\n')
                     traceback.print_exc(TRACEBACK_LIMIT, f)
                     f.write('\n')
         return command_func
     return _my_error_wrap
+
+
+@my_error_wrap()
+def hello():
+    print('hello')
+    0/0
 
 
 def get_last_commit_id(user_name, repo_name):
