@@ -46,12 +46,6 @@ def my_error_wrap(filename=ERROR_LOG_FILENAME):
     return _my_error_wrap
 
 
-@my_error_wrap()
-def hello():
-    print('hello')
-    0/0
-
-
 def get_last_commit_id(user_name, repo_name):
     data = get_commits(user_name, repo_name)
     if len(data) == 0:
