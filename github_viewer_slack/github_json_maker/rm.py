@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from slackbot.bot import respond_to
-from slackbot_settings import COMMITS_JSON_FILENAME
+from slackbot_settings import COMMITS_JSON_FILENAME, TRACEBACK_LIMIT
 from utils import NotFoundRepositoryException, my_error_wrap, my_error_log
 import traceback
 import json
@@ -19,7 +19,7 @@ def rm(message, _, github_url):
     try:
         delete_repo(user_name, repo_name)
     except NotFoundRepositoryException as ex:
-        my_error_log(traceback.format_exc())
+        my_error_log(traceback.format_exc(TRACEBACK_LIMIT))
         message.reply('{}/{}は既に登録されています'.format(
             user_name, repo_name))
         return
@@ -34,7 +34,7 @@ def delete_repo(user_name, repo_name):
     try:
         del(d[user_name][repo_name])
     except KeyError:
-        my_error_log(traceback.format_exc())
+        my_error_log(traceback.format_exc(TRACEBACK_LIMIT))
         raise NotFoundRepositoryException('{}/{}は既に登録されています'.format(
             user_name, repo_name))
 

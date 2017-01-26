@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from slackbot_settings import Channel
-from slackbot_settings import API_TOKEN, COMMITS_JSON_FILENAME
+from slackbot_settings import API_TOKEN, COMMITS_JSON_FILENAME, TRACEBACK_LIMIT
 from slacker import Slacker
 from utils import get_jdata, get_commits, get_post_commits, get_branches, my_error_log
 import traceback
@@ -47,4 +47,4 @@ if __name__ == '__main__':
     try:
         main()
     except Exception:
-        my_error_log(traceback.format_exc())
+        my_error_log(traceback.format_exc(TRACEBACK_LIMIT))

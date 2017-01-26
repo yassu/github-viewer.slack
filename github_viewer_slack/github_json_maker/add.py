@@ -5,7 +5,7 @@ import json
 from slackbot.bot import respond_to
 import re
 import traceback
-from slackbot_settings import COMMITS_JSON_FILENAME
+from slackbot_settings import COMMITS_JSON_FILENAME, TRACEBACK_LIMIT
 from utils import (get_last_commit_id, my_error_wrap, my_error_log,
     RegisteredRepositoryException, NotFoundRepositoryException)
 
@@ -23,10 +23,10 @@ def add(message, _, github_url):
         message.reply("リポジトリ {}/{}を登録しました".format(
             user_name, repo_name))
     except RegisteredRepositoryException as ex:
-        my_error_log(traceback.format_exc())
+        my_error_log(traceback.format_exc(TRACEBACK_LIMIT))
         message.reply("Error: {}".format(ex.args[0]))
     except NotFoundRepositoryException as ex:
-        my_error_log(traceback.format_exc())
+        my_error_log(traceback.format_exc(TRACEBACK_LIMIT))
         message.reply("Error: {}".format(ex.args[0]))
 
 
