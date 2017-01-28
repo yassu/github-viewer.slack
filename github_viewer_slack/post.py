@@ -25,8 +25,8 @@ def post_by_repo(user_name, repo_name):
         text += "* {}\n".format(message)
 
     last_posted_sha = get_jdata()[user_name][repo_name]
-    text += "https://github.com/{}/{}/compare/{}...master\n".format(
-        user_name, repo_name, last_posted_sha)
+    text += "https://github.com/{}/{}/compare/{}...{}\n".format(
+        user_name, repo_name, last_posted_sha, last_commit_sha)
 
     post(text)
     update_repo(user_name, repo_name, last_commit_sha)

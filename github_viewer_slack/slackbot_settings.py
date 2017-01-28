@@ -9,7 +9,7 @@ ERROR_LOG_FILENAME = 'log/error_log'
 LOG_FILENAME = 'log/log'
 TRACEBACK_LIMIT = 10
 API_TOKEN = json.load(open(CONFIG_FILENAME))['API_TOKEN']
-Channel = 'github'
+Channel = 'general'
 
 PLUGINS = [
     'github_json_maker',
