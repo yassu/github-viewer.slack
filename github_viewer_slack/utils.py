@@ -15,7 +15,6 @@ def get_date_string():
     now = datetime.now()
     year, mon, day = now.year, now.month, now.day
     hour, minute, second = now.hour, now.minute, now.second
-    print(hour)
     return ("{} {}/{} {}:{}:{}\n".format(year, mon, day, hour, minute, second))
 
 
