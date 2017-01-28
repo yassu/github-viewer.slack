@@ -11,6 +11,17 @@ import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
 
 
+class RegisteredRepositoryException(Exception):
+    """
+    Exception that raise when the repository is already registered
+    """
+
+class NotFoundRepositoryException(Exception):
+    """
+    Exception that raise when there isn't the repository on the github
+    """
+
+
 def get_date_string():
     now = datetime.now()
     year, mon, day = now.year, now.month, now.day
@@ -27,6 +38,11 @@ def my_log(text, filename=LOG_FILENAME):
 
 def my_error_log(text, filename=ERROR_LOG_FILENAME):
     my_log('Error is occured:\n' + text, filename=filename)
+
+
+def raise_registered_repository_exception(user_name, repo_name):
+    raise RegisteredRepositoryException('{}/{} is already registered.'.format(
+        user_name, repo_name))
 
 
 def my_error_wrap(filename=ERROR_LOG_FILENAME):
@@ -94,14 +110,3 @@ def get_post_commits(user_name, repo_name):
         if sha == posted_last_commit_id:
             break
         yield commit
-
-
-class RegisteredRepositoryException(Exception):
-    """
-    Exception that raise when the repository is already registered
-    """
-
-class NotFoundRepositoryException(Exception):
-    """
-    Exception that raise when there isn't the repository on the github
-    """

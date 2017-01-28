@@ -7,7 +7,8 @@ import re
 import traceback
 from slackbot_settings import COMMITS_JSON_FILENAME, TRACEBACK_LIMIT
 from utils import (get_last_commit_id, my_error_wrap, my_error_log,
-    RegisteredRepositoryException, NotFoundRepositoryException)
+    RegisteredRepositoryException,
+    raise_registered_repository_exception, NotFoundRepositoryException)
 
 
 @respond_to('^\s*(add\s|\+)\s*(\S+)\s*$', re.IGNORECASE)
@@ -43,8 +44,6 @@ def add_repo(user_name, repo_name):
     if repo_name not in d[user_name]:
         d[user_name][repo_name] = commit_id
     else:
-        raise RegisteredRepositoryException(
-            '{}/{} is already registered.'.format(user_name, repo_name))
-
+        raise_registered_repository_exception(user_name, repo_name)
     with open(COMMITS_JSON_FILENAME, 'w') as jf:
         json.dump(d, jf, indent=4)
