@@ -45,6 +45,11 @@ def raise_registered_repository_exception(user_name, repo_name):
         user_name, repo_name))
 
 
+def raise_not_found_repository_exception(user_name, repo_name):
+    raise NotFoundRepositoryException('{}/{} is not found.'.format(
+        user_name, repo_name))
+
+
 def my_error_wrap(filename=ERROR_LOG_FILENAME):
     def _my_error_wrap(func):
         @functools.wraps(func)
@@ -76,8 +81,7 @@ def get_commits(user_name, repo_name):
     try:
         response = urlopen(url).read()
     except HTTPError as ex:
-        raise NotFoundRepositoryException('Repository {}/{} is not found.'
-            .format(user_name, repo_name))
+        raise_not_found_repository_exception(user_name, repo_name)
     data = response.decode()
     return json.loads(response.decode())
 

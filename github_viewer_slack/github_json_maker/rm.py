@@ -3,7 +3,8 @@
 
 from slackbot.bot import respond_to
 from slackbot_settings import COMMITS_JSON_FILENAME, TRACEBACK_LIMIT
-from utils import NotFoundRepositoryException, my_error_wrap, my_error_log
+from utils import (NotFoundRepositoryException,
+            raise_not_found_repository_exception, my_error_wrap, my_error_log)
 import traceback
 import json
 
@@ -20,8 +21,7 @@ def rm(message, _, github_url):
         delete_repo(user_name, repo_name)
     except NotFoundRepositoryException as ex:
         my_error_log(traceback.format_exc(TRACEBACK_LIMIT))
-        message.reply('Repository {}/{} is already registered.'.format(
-            user_name, repo_name))
+        message.reply("Error: {}".format(ex.args[0]))
         return
 
     message.reply("{}/{} is removed.".format(user_name, repo_name))
@@ -35,9 +35,7 @@ def delete_repo(user_name, repo_name):
         del(d[user_name][repo_name])
     except KeyError:
         my_error_log(traceback.format_exc(TRACEBACK_LIMIT))
-        raise NotFoundRepositoryException(
-                'There is not repository {}/{} on the github.'.format(
-                    user_name, repo_name))
+        raise_not_found_repository_exception(user_name, repo_name)
 
     with open(COMMITS_JSON_FILENAME, 'w') as jf:
         json.dump(d, jf, indent=4)
