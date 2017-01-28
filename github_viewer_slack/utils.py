@@ -61,7 +61,7 @@ def get_commits(user_name, repo_name):
     try:
         response = urlopen(url).read()
     except HTTPError as ex:
-        raise NotFoundRepositoryException('リポジトリ {}/{} は存在しません'
+        raise NotFoundRepositoryException('Repository {}/{} is not found.'
             .format(user_name, repo_name))
     data = response.decode()
     return json.loads(response.decode())
@@ -85,7 +85,7 @@ def get_jdata():
 
 def get_post_commits(user_name, repo_name):
     """
-    postする (commit_id, commit_message) の列を生成
+    create series such as (commit_id, commit_message) for posting message
     """
     posted_last_commit_id = get_jdata()[user_name][repo_name]
     commits = get_commits(user_name, repo_name)
@@ -99,10 +99,10 @@ def get_post_commits(user_name, repo_name):
 
 class RegisteredRepositoryException(Exception):
     """
-    そのリポジトリが既に登録されているときに検出されるException
+    Exception that raise when the repository is already registered
     """
 
 class NotFoundRepositoryException(Exception):
     """
-    そのリポジトリがgithub上に存在しないときに検出されるException
+    Exception that raise when there isn't the repository on the github
     """

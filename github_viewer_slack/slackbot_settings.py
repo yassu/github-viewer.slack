@@ -15,4 +15,4 @@ PLUGINS = [
     'github_json_maker',
 ]
 
-default_reply = "Error: 文法の解釈に失敗しました"
+default_reply = "Error: Illegal syntax"

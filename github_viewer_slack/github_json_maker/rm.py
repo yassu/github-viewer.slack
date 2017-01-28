@@ -20,11 +20,11 @@ def rm(message, _, github_url):
         delete_repo(user_name, repo_name)
     except NotFoundRepositoryException as ex:
         my_error_log(traceback.format_exc(TRACEBACK_LIMIT))
-        message.reply('{}/{}は既に登録されています'.format(
+        message.reply('Repository {}/{} is already registered.'.format(
             user_name, repo_name))
         return
 
-    message.reply("{}/{} を削除しました".format(user_name, repo_name))
+    message.reply("{}/{} is removed.".format(user_name, repo_name))
 
 
 def delete_repo(user_name, repo_name):
@@ -35,8 +35,9 @@ def delete_repo(user_name, repo_name):
         del(d[user_name][repo_name])
     except KeyError:
         my_error_log(traceback.format_exc(TRACEBACK_LIMIT))
-        raise NotFoundRepositoryException('{}/{}は既に登録されています'.format(
-            user_name, repo_name))
+        raise NotFoundRepositoryException(
+                'There is not repository {}/{} on the github.'.format(
+                    user_name, repo_name))
 
     with open(COMMITS_JSON_FILENAME, 'w') as jf:
         json.dump(d, jf, indent=4)

@@ -20,7 +20,7 @@ def add(message, _, github_url):
     user_name, repo_name = github_url.split('/')
     try:
         add_repo(user_name, repo_name)
-        message.reply("リポジトリ {}/{}を登録しました".format(
+        message.reply("Repository {}/{} is registered.".format(
             user_name, repo_name))
     except RegisteredRepositoryException as ex:
         my_error_log(traceback.format_exc(TRACEBACK_LIMIT))
@@ -44,7 +44,7 @@ def add_repo(user_name, repo_name):
         d[user_name][repo_name] = commit_id
     else:
         raise RegisteredRepositoryException(
-            '{}/{}は既に登録されています'.format(user_name, repo_name))
+            '{}/{} is already registered.'.format(user_name, repo_name))
 
     with open(COMMITS_JSON_FILENAME, 'w') as jf:
         json.dump(d, jf, indent=4)
