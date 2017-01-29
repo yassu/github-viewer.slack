@@ -24,7 +24,7 @@ def rm(message, _, github_url):
         message.reply("Error: {}".format(ex.args[0]))
         return
 
-    message.reply("{}/{} is removed.".format(user_name, repo_name))
+    message.reply(":scream: {}/{} is removed.".format(user_name, repo_name))
 
 
 def delete_repo(user_name, repo_name):

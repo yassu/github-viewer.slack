@@ -21,7 +21,7 @@ def add(message, _, github_url):
     user_name, repo_name = github_url.split('/')
     try:
         add_repo(user_name, repo_name)
-        message.reply("Repository {}/{} is registered.".format(
+        message.reply(":clap: Repository {}/{} is registered.".format(
             user_name, repo_name))
     except RegisteredRepositoryException as ex:
         my_error_log(traceback.format_exc(TRACEBACK_LIMIT))
