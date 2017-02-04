@@ -13,7 +13,7 @@ ssl._create_default_https_context = ssl._create_unverified_context
 COMMAND_TO_HELP = {
     'add': 'add {user}/{repo-name}: register Repository {user}/{repo-name}',
     'rm': 'rm {user}/{repo-name}: delete Repository {user}/{repo-name}',
-    'list': 'list: show all registered repositories',
+    'list': 'list [pattern]: show registered repositories',
     'help': 'help {command}: show help of {command}',
 }
 
