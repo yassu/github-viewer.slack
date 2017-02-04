@@ -13,7 +13,6 @@ def list(message, pattern):
     if pattern is None:
         pattern = '.*'
     pattern = pattern.strip()
-    print(pattern)
 
     text = "branch names\n"
     for branch_name in get_branch_names():
