@@ -10,6 +10,13 @@ from slackbot_settings import LOG_FILENAME, ERROR_LOG_FILENAME, TRACEBACK_LIMIT
 import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
 
+COMMAND_TO_HELP = {
+    'add': 'add {user}/{repo-name}: register Repository {user}/{repo-name}',
+    'rm': 'rm {user}/{repo-name}: delete Repository {user}/{repo-name}',
+    'list': 'list: show all registered repositories',
+    'help': 'help {command}: show help of {command}',
+}
+
 
 class RegisteredRepositoryException(Exception):
     """
