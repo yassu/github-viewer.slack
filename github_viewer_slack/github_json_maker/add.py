@@ -6,7 +6,8 @@ from slackbot.bot import respond_to
 import re
 import traceback
 from slackbot_settings import COMMITS_JSON_FILENAME, TRACEBACK_LIMIT
-from utils import (get_last_commit_id, my_error_wrap, my_error_log,
+from utils import (
+    get_last_commit_id, my_error_wrap, my_error_log,
     RegisteredRepositoryException,
     raise_registered_repository_exception, NotFoundRepositoryException)
 
@@ -29,7 +30,6 @@ def add(message, _, github_url):
     except NotFoundRepositoryException as ex:
         my_error_log(traceback.format_exc(TRACEBACK_LIMIT))
         message.reply("Error: {}".format(ex.args[0]))
-
 
 
 def add_repo(user_name, repo_name):

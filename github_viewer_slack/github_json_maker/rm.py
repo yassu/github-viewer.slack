@@ -3,8 +3,9 @@
 
 from slackbot.bot import respond_to
 from slackbot_settings import COMMITS_JSON_FILENAME, TRACEBACK_LIMIT
-from utils import (NotFoundRepositoryException,
-            raise_not_found_repository_exception, my_error_wrap, my_error_log)
+from utils import (
+    NotFoundRepositoryException,
+    raise_not_found_repository_exception, my_error_wrap, my_error_log)
 import traceback
 import json
 

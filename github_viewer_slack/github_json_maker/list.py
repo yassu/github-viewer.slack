@@ -4,7 +4,7 @@
 
 import re
 from slackbot.bot import respond_to
-from utils import get_commits, get_branch_names, my_error_wrap
+from utils import get_branch_names, my_error_wrap
 
 
 @respond_to('^\s*list(\s+\S+)?\s*$', re.IGNORECASE)

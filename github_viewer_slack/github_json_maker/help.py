@@ -3,8 +3,8 @@
 
 import re
 from slackbot.bot import respond_to
-from slackbot_settings import COMMITS_JSON_FILENAME, TRACEBACK_LIMIT
 from utils import COMMAND_TO_HELP
+
 
 @respond_to('^\s*help(\s+\S+)?\s*$', re.IGNORECASE)
 def help(message, command_name):

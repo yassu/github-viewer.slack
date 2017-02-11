@@ -3,14 +3,15 @@
 from slackbot_settings import Channel
 from slackbot_settings import API_TOKEN, COMMITS_JSON_FILENAME, TRACEBACK_LIMIT
 from slacker import Slacker
-from utils import (get_jdata, get_commits, get_post_commits,
-        get_branches, my_error_log)
+from utils import (
+    get_jdata, get_post_commits, get_branches, my_error_log)
 import traceback
 import json
 
+
 def post(message):
-   slacker = Slacker(API_TOKEN)
-   slacker.chat.post_message(Channel, message , as_user=True)
+    slacker = Slacker(API_TOKEN)
+    slacker.chat.post_message(Channel, message, as_user=True)
 
 
 def post_by_repo(user_name, repo_name):

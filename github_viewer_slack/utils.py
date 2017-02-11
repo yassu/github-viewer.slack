@@ -23,6 +23,7 @@ class RegisteredRepositoryException(Exception):
     Exception that raise when the repository is already registered
     """
 
+
 class NotFoundRepositoryException(Exception):
     """
     Exception that raise when there isn't the repository on the github
@@ -63,7 +64,7 @@ def my_error_wrap(filename=ERROR_LOG_FILENAME):
         def command_func(*args, **kw):
             try:
                 return func(*args, **kw)
-            except Exception as ex:
+            except Exception:
                 with open(filename, 'a') as f:
                     f.write(get_date_string())
                     f.write('Error is occured:\n')
@@ -87,9 +88,8 @@ def get_commits(user_name, repo_name):
         repo_name)
     try:
         response = urlopen(url).read()
-    except HTTPError as ex:
+    except HTTPError:
         raise_not_found_repository_exception(user_name, repo_name)
-    data = response.decode()
     return json.loads(response.decode())
 
 
