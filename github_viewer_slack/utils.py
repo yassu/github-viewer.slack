@@ -89,6 +89,7 @@ def get_commits(user_name, repo_name):
     try:
         response = urlopen(url).read()
     except HTTPError:
+        my_error_log('url is {}'.format(url))
         raise_not_found_repository_exception(user_name, repo_name)
     return json.loads(response.decode())
 
