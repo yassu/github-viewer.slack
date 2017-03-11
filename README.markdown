@@ -9,7 +9,7 @@ Github-Viewer.slack
 # How to setup in the local
 1. `pip install slackbot`
 2. Modify config.json for your enviroment
-    - API\_TOKEN should be set [this value](#api_token)
+    - API\_TOKEN should be set [THE BOT USER's TOKEN](#api_token)
 
 # How to run github\_viewer.slack
 1. `cd github_viewer_slack && python github_viewer_run.py`
