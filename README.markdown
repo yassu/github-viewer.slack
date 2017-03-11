@@ -7,9 +7,8 @@ Github-Viewer.slack
 2. Get OAuth API Token of the bot user <a name="api_token">***!***</a>
 
 # How to setup in the local
-1. `virtualenv .venv && . .venv/bin/activate` (if you need it)
-2. `pip install slackbot`
-3. Modify config.json for your enviroment
+1. `pip install slackbot`
+2. Modify config.json for your enviroment
     - API\_TOKEN should be set [this value](#api_token)
 
 # How to run github\_viewer.slack
