@@ -15,3 +15,6 @@ Github-Viewer.slack
 1. `cd github_viewer_slack && python github_viewer_run.py`
 2. Send the message `@{bot_name} hi` in set CHANNEL
     - If @{bot\_name} replies some message, you finished to introduce github\_viewer.slack !
+
+# LINCENSE
+[MIT](LICENSE)
