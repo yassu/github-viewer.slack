@@ -9,9 +9,22 @@ import traceback
 import json
 
 
-def post(message):
+def post(**blob):
+    query = {
+        'as_user':      True,
+        'text':         None,
+        'username':     None,
+        'parse':        None,
+        'link_names':   None,
+        'attachments':  None,
+        'unfurl_links': None,
+        'unfurl_media': None,
+        'icon_url':     None,
+        'icon_emoji':   None
+    }
+    query.update(blob)
     slacker = Slacker(API_TOKEN)
-    slacker.chat.post_message(Channel, message, as_user=True)
+    slacker.chat.post_message(Channel, **query)
 
 
 def post_by_repo(user_name, repo_name):
@@ -19,17 +32,18 @@ def post_by_repo(user_name, repo_name):
     if len(commits) == 0:
         return
 
-    last_commit_sha = commits[0]['sha']
-    text = "{}/{} is comitted: \n".format(user_name, repo_name)
+    attachment_list = []
+    text = "+ {}/{} is comitted\n".format(user_name, repo_name)
     for commit in get_post_commits(user_name, repo_name):
-        message = commit['commit']['message'].split("\n", 1)[0]
-        text += "* {}\n".format(message)
+        commit_link = '<' + commit['html_url'] + '|' + commit['sha'][0:6] + '>'
+        message = commit['commit']['message'].split("\n", 1)[0][0:49]
+        attachment_list.append(commit_link + ' ' + message)
 
-    last_posted_sha = get_jdata()[user_name][repo_name]
-    text += "https://github.com/{}/{}/compare/{}...{}\n".format(
-        user_name, repo_name, last_posted_sha, last_commit_sha)
+    attachment_text = "\n".join(list(map(lambda x: "- " + x, attachment_list)))
+    attachments = '[{{"text": "{}"}}]'.format(attachment_text)
+    post(text=text, attachments=attachments)
 
-    post(text)
+    last_commit_sha = commits[0]['sha']
     update_repo(user_name, repo_name, last_commit_sha)
 
 
