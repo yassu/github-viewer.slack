@@ -33,11 +33,11 @@ def post_by_repo(user_name, repo_name):
         return
 
     attachment_list = []
-    text = "{}/{} is comitted\n".format(user_name, repo_name)
+    text = "+ {}/{} is comitted\n".format(user_name, repo_name)
     for commit in get_post_commits(user_name, repo_name):
         commit_link = '<' + commit['html_url'] + '|' + commit['sha'][0:6] + '>'
         message = commit['commit']['message'].split("\n", 1)[0][0:49]
-        attachment_list.append(commit_link + ': ' + message)
+        attachment_list.append(commit_link + ' ' + message)
 
     attachment_text = "\n".join(list(map(lambda x: "- " + x, attachment_list)))
     attachments = '[{{"text": "{}"}}]'.format(attachment_text)
