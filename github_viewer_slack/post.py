@@ -34,7 +34,7 @@ def post_by_repo(user_name, repo_name):
 
     attachment_list = []
     text = "+ {}/{} is comitted\n".format(user_name, repo_name)
-    for commit in get_post_commits(user_name, repo_name):
+    for commit in commits:
         commit_link = '<' + commit['html_url'] + '|' + commit['sha'][0:6] + '>'
         message = commit['commit']['message'].split("\n", 1)[0][0:49]
         attachment_list.append(commit_link + ' ' + message)
